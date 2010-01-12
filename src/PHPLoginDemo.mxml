@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   minWidth="955" minHeight="600" currentState="startingScreen"
+			   creationComplete="application1_creationCompleteHandler(event)">
+
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			protected function btn_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL( new URLRequest( encodeURI("index.php?logout=1")), "_self");
+			}
+
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				if(this.parameters.logged_in == 1)
+				{
+					currentState = 'loggedIn';
+				}
+			}
+
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<s:State name="startingScreen" />
+		<s:State name="loggedIn" />
+	</fx:Declarations>
+	
+	<s:Panel name="Test" left="25" right="25" top="20" bottom="25" title="My Application">
+		<s:Button id="btn" left="10" top="10" click="btn_clickHandler(event)" label="Log Out" includeIn="loggedIn" />
+		<s:Label id="lbl" left="10" top="10" text="You need to log in" includeIn="startingScreen" />
+	</s:Panel>
+	
+</s:Application>
